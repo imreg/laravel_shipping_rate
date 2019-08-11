@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Interfaces\ShippingRateServiceInterface;
+use App\Services\Interfaces\ShippingServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,32 +16,20 @@ class ShippingRateController extends Controller
     private $shippingRateService;
 
     /**
+     * @var ShippingServiceInterface
+     */
+    private $shippingService;
+
+    /**
      * ShippingRateController constructor.
      * @param ShippingRateServiceInterface $shippingRateService
      */
-    public function __construct(ShippingRateServiceInterface $shippingRateService)
-    {
+    public function __construct(
+        ShippingRateServiceInterface $shippingRateService,
+        ShippingServiceInterface $shippingService
+    ) {
         $this->shippingRateService = $shippingRateService;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $this->shippingService = $shippingService;
     }
 
     /**
@@ -71,51 +60,16 @@ class ShippingRateController extends Controller
             strtoupper($request->country_code)
         );
 
+        $storeResult = null;
+
+        if (isset($result['error']) === false) {
+            $storeResult = $this->shippingService->create($result);
+        }
+
+        if (isset($storeResult['error']) === true) {
+            return response()->json($storeResult, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         return response()->json($result, Response::HTTP_OK);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

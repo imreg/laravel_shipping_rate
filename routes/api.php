@@ -17,4 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/','ShippingController@index');
+Route::get('/{id}','ShippingController@show');
+Route::put('/{id}','ShippingController@update');
+Route::delete('/{id}','ShippingController@destroy');
 Route::post('/calculate','ShippingRateController@store');

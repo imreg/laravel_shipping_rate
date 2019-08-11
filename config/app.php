@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\ShippingRateServiceProvider::class,
+        App\Providers\ShippingServiceProvider::class,
     ],
 
     /*

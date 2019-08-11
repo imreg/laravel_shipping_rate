@@ -59,7 +59,35 @@ curl -d '{"price":60,"weight":60,"country_code":"PL"}' -H "Content-Type: applica
 {"error":"Error: PL doesn't have any shipping rates"}
 ```
 
-##### 3. Function Test 
+##### 3. CRUD options
+
+
+##### 3.1 Add new record to Shipping
+
+###### Shipping is created when was calculated
+
+
+##### 3.2 List of Shippings
+```
+curl http://127.0.0.1:8000/api
+```
+
+##### 3.3 One Shipping payload by id
+```
+curl http://127.0.0.1:8000/api/1
+```
+
+##### 3.4 Update Shipping payload by id
+```
+curl -d '{"price":50,"weight":60,"country_code":"UK","shipping_fee":56,"total":106}' -H "Content-Type: application/json" -X PUT http://127.0.0.1:8000/api/5
+```
+
+##### 3.5 Delete Shipping payload by id
+```
+curl -X "DELETE" http://127.0.0.1:8000/api/1
+```
+
+##### 4. Function Test 
 ```
 bin/phpspec run
 ```

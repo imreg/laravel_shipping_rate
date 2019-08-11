@@ -3,13 +3,9 @@
 namespace spec\App\Services;
 
 use App\Exceptions\ShippingRateException;
-use App\Repositories\Interfaces\ShippingRateRepositoryInterface;
 use App\Repositories\ShippingRateRepository;
 use App\Services\CountryFeeService;
-use App\Services\Interfaces\CountryFeeServiceInterface;
 use App\Services\PayloadService;
-use App\Services\ShippingRateSevice;
-use App\ShippingRate;
 use PhpSpec\ObjectBehavior;
 
 class ShippingRateSeviceSpec extends ObjectBehavior
