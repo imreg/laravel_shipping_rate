@@ -17,10 +17,9 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            ShippingServiceInterface::class,
-            ShippingService::class
-        );
+        $this->app->when(\App\Http\Controllers\ShippingController::class)
+            ->needs(\App\Services\Interfaces\ShippingServiceInterface::class)
+            ->give(\App\Services\ShippingService::class);
 
         $this->app->bind(
             ShippingRepositoryInterface::class,
