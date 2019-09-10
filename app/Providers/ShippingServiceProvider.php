@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use App\Repositories\Interfaces\ShippingRepositoryInterface;
 use App\Repositories\ShippingRepository;
-use App\Services\Interfaces\ShippingServiceInterface;
-use App\Services\ShippingService;
 use Illuminate\Support\ServiceProvider;
 
 class ShippingServiceProvider extends ServiceProvider
